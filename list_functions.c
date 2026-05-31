@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.c                                             :+:      :+:    :+:   */
+/*   list_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 20:03:15 by saperez-          #+#    #+#             */
-/*   Updated: 2026/05/31 20:24:52 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/05/31 22:44:47 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "pushswap.h"
 
 t_list	*ft_lstnew(void *content)
 {
@@ -70,4 +72,17 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		actual = nxt;
 	}
 	*lst = NULL;
+}
+
+int	ft_lstsize(t_list *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
