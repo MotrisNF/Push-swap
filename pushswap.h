@@ -6,7 +6,7 @@
 /*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 20:07:18 by saperez-          #+#    #+#             */
-/*   Updated: 2026/05/31 21:37:03 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/05/31 22:12:53 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,8 @@ void    ft_rotate_both(t_list **a, t_list **b);
 void    ft_reverse_rotate_a(t_list **a);
 void    ft_reverse_rotate_b(t_list **b);
 void    ft_reverse_rotate_both(t_list **a, t_list **b);
+//Algoritmes
 
+//Selection sort
+void    ft_simple_algoritme(size_t size, t_list **a, t_list **b);
 #endif
