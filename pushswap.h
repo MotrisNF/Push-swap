@@ -6,7 +6,7 @@
 /*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 20:07:18 by saperez-          #+#    #+#             */
-/*   Updated: 2026/05/31 22:12:53 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/05/31 23:28:52 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <stddef.h>
 # include <unistd.h>
+#include <stdio.h>
 
 
 //List define and list functions
@@ -32,7 +33,7 @@ t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 //First stack creation
-t_list  *ft_create_stack(int **index, size_t size);
+t_list  *ft_create_stack(int *index, int size);
 //Global movement functions
 void    ft_swap(t_list **lst);
 void    ft_push(t_list **dst, t_list **src);
@@ -56,5 +57,5 @@ void    ft_reverse_rotate_both(t_list **a, t_list **b);
 //Algoritmes
 
 //Selection sort
-void    ft_simple_algoritme(size_t size, t_list **a, t_list **b);
+size_t    ft_simple_algoritme(size_t size, t_list **a, t_list **b);
 #endif
