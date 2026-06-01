@@ -6,11 +6,11 @@
 /*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 02:13:58 by saperez-          #+#    #+#             */
-/*   Updated: 2026/06/01 02:42:26 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/01 02:46:49 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "bonus.h"
 
 void	ft_checker_actuator(t_list **a, t_list **b, char *input)
 {
