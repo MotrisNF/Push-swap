@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/01 21:26:00 by saperez-          #+#    #+#             */
-/*   Updated: 2026/06/02 20:53:19 by saperez-         ###   ########.fr       */
+/*   Created: 2026/06/02 21:52:52 by saperez-          #+#    #+#             */
+/*   Updated: 2026/06/02 21:55:14 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,61 +14,56 @@
 
 size_t	ft_get_closet_sqrt(size_t nbr)
 {
-	size_t sqrt;
+	size_t	sqrt;
 
-	if (nbr == 0)
-		return (0);
-	if (nbr == 1)
-		return (1);
+	if (nbr <= 1)
+		return (nbr);
 	sqrt = 1;
-	while (sqrt < nbr / 2)
-	{
-		if (sqrt * sqrt == nbr)
-			return (sqrt);
+	while (sqrt * sqrt < nbr)
 		sqrt++;
-	}
-	return (ft_get_closet_sqrt(nbr + 1));
+	return (sqrt);
 }
 
 int	ft_get_better_node(t_list **a, size_t size, size_t step, size_t chunk)
 {
-	int min = (step - 1) * chunk + 1;
-	int max = step * chunk;
-	t_list	*temp = *a;
-	size_t counter = 1;
-	size_t better_value = 0;
-	size_t better_pos = size / 2;
+	t_list	*temp;
+	size_t	cnt;
+	size_t	b_pos;
+	size_t	b_val;
+
+	temp = *a;
+	cnt = 1;
+	b_val = 0;
+	b_pos = size / 2;
 	while (temp)
 	{
-		if (*(int *)temp-> content >= min && *(int *)temp-> content <= max)
+		if (*(int *)temp->content >= (int)((step - 1) * chunk + 1)
+			&& *(int *)temp->content <= (int)(step * chunk))
 		{
-			if (counter < size / 2 && counter < better_pos)
+			if ((cnt < size / 2 && cnt < b_pos) || (b_pos > size - cnt))
 			{
-				better_pos = counter;
-				better_value = *(int *)temp-> content;
-			}
-			else if (better_pos > size - counter)
-			{
-				better_pos = size - counter;
-				better_value = *(int *)temp-> content;
+				b_pos = (cnt < size / 2) * cnt + (cnt >= size / 2) * (size - cnt);
+				b_val = *(int *)temp->content;
 			}
 		}
 		temp = temp->next;
-		counter++;
+		cnt++;
 	}
-	return (better_value);
+	return (b_val);
 }
 
 int	ft_get_up_down(t_list **a, int value, size_t size)
 {
-	int	counter = 1;
-	t_list *temp = *a;
+	int		counter;
+	t_list	*temp;
 
+	counter = 1;
+	temp = *a;
 	while (temp)
 	{
 		if (*(int *)temp->content == value)
 		{
-			if (counter < size / 2)
+			if (counter < (int)size / 2)
 				return (1);
 			else
 				return (0);
@@ -81,7 +76,7 @@ int	ft_get_up_down(t_list **a, int value, size_t size)
 
 int	ft_get_position(t_list **list, size_t value)
 {
-	int	counter;
+	int		counter;
 	t_list	*tmp;
 
 	tmp = *list;
@@ -94,71 +89,64 @@ int	ft_get_position(t_list **list, size_t value)
 	return (counter);
 }
 
-int	ft_medium_algoritme(t_list **a, t_list **b, size_t size)
+static void	ft_rotate_and_push_b(t_list **a, t_list **b, int val, int *count, size_t limit)
 {
-	size_t chunk = ft_get_closet_sqrt(size) + 1;
-	size_t step = 1;
-	size_t i;
-	int	best_value;
-	t_list *tmp;
-	int	counter;
-
-	counter = 0;
-	i = 1;
-	while (i <= size)
+	while (*(int *)(*a)->content != val)
 	{
-		best_value = ft_get_better_node(a, size, step, chunk);
-		if (best_value == 0)
-		{
-			if (step <= chunk)
-			{
-				step++;
-				continue ;
-			}
-			else
-			{
-				ft_push_b(a, b);
-				counter++;
-			}
-		}
-		while (best_value != 0 && *(int *)(*a)->content != best_value)
-		{
-			if (ft_get_up_down(a, best_value, size - i))
-			{
-				ft_rotate_a(a);
-				counter++;
-			}
-			else
-			{
-				ft_reverse_rotate_a(a);
-				counter++;
-			}
-		}
-		ft_push_b(a, b);
-		counter++;
-		i++;
+		if (ft_get_up_down(a, val, limit))
+			ft_rotate_a(a);
+		else
+			ft_reverse_rotate_a(a);
+		(*count)++;
 	}
+	ft_push_b(a, b);
+	(*count)++;
+}
+
+static void	ft_sort_back_to_a(t_list **a, t_list **b, int *count)
+{
+	int	i;
+
 	i = ft_lstsize(*b);
 	while (i > 0)
 	{
 		while (*(int *)(*b)->content != i)
 		{
 			if (ft_get_position(b, i) > ft_lstsize(*b) / 2)
-			{
 				ft_reverse_rotate_b(b);
-				counter++;
-			}
 			else
-			{
 				ft_rotate_b(b);
-				counter++;
-			}
+			(*count)++;
 		}
-		counter++;
-		ft_push_a(a,b);
+		ft_push_a(a, b);
+		(*count)++;
 		i--;
 	}
-	return (counter);
 }
 
+int	ft_medium_algoritme(t_list **a, t_list **b, size_t size)
+{
+	size_t	chunk;
+	size_t	step;
+	size_t	i;
+	int		best_value;
+	int		counter;
 
+	chunk = ft_get_closet_sqrt(size) * 2;
+	step = 1;
+	counter = 0;
+	i = 1;
+	while (i <= size)
+	{
+		best_value = ft_get_better_node(a, size, step, chunk);
+		if (best_value == 0 && step <= chunk)
+		{
+			step++;
+			continue ;
+		}
+		ft_rotate_and_push_b(a, b, best_value, &counter, size - i);
+		i++;
+	}
+	ft_sort_back_to_a(a, b, &counter);
+	return (counter);
+}

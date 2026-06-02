@@ -33,7 +33,7 @@ void shuffle(int *arr, int n)
 int main(void)
 {
 	srand(time(NULL));
-    int size = 100;
+    int size = 500;
     int list[size];
 
     for (int i = 0; i < size; i++)
