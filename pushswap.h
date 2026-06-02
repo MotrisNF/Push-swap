@@ -6,7 +6,7 @@
 /*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 20:07:18 by saperez-          #+#    #+#             */
-/*   Updated: 2026/06/01 03:16:04 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/02 19:07:01 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void    ft_reverse_rotate_both(t_list **a, t_list **b);
 
 //Selection sort
 size_t    ft_simple_algoritme(size_t size, t_list **a, t_list **b);
+int     ft_medium_algoritme(t_list **a, t_list **b, size_t size);
 
 //Check order
 int     ft_check_order(t_list **stack, size_t size);

@@ -6,9 +6,11 @@
 /*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 21:26:00 by saperez-          #+#    #+#             */
-/*   Updated: 2026/06/01 22:03:20 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/02 20:53:19 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "pushswap.h"
 
 size_t	ft_get_closet_sqrt(size_t nbr)
 {
@@ -77,31 +79,86 @@ int	ft_get_up_down(t_list **a, int value, size_t size)
 	return (1);
 }
 
+int	ft_get_position(t_list **list, size_t value)
+{
+	int	counter;
+	t_list	*tmp;
+
+	tmp = *list;
+	counter = 1;
+	while (value != *(int *)(tmp)->content)
+	{
+		tmp = tmp->next;
+		counter++;
+	}
+	return (counter);
+}
+
 int	ft_medium_algoritme(t_list **a, t_list **b, size_t size)
 {
-	size_t chunk = ft_get_closet_sqrt(size);
+	size_t chunk = ft_get_closet_sqrt(size) + 1;
 	size_t step = 1;
 	size_t i;
 	int	best_value;
+	t_list *tmp;
+	int	counter;
+
+	counter = 0;
 	i = 1;
-	while (i < size)
+	while (i <= size)
 	{
 		best_value = ft_get_better_node(a, size, step, chunk);
-		if (best_value = 0)
+		if (best_value == 0)
 		{
-			step++;
-			continue ;
+			if (step <= chunk)
+			{
+				step++;
+				continue ;
+			}
+			else
+			{
+				ft_push_b(a, b);
+				counter++;
+			}
 		}
-		while (*(int *)(*a) != best_value)
+		while (best_value != 0 && *(int *)(*a)->content != best_value)
 		{
 			if (ft_get_up_down(a, best_value, size - i))
+			{
 				ft_rotate_a(a);
+				counter++;
+			}
 			else
+			{
 				ft_reverse_rotate_a(a);
+				counter++;
+			}
 		}
 		ft_push_b(a, b);
+		counter++;
 		i++;
 	}
+	i = ft_lstsize(*b);
+	while (i > 0)
+	{
+		while (*(int *)(*b)->content != i)
+		{
+			if (ft_get_position(b, i) > ft_lstsize(*b) / 2)
+			{
+				ft_reverse_rotate_b(b);
+				counter++;
+			}
+			else
+			{
+				ft_rotate_b(b);
+				counter++;
+			}
+		}
+		counter++;
+		ft_push_a(a,b);
+		i--;
+	}
+	return (counter);
 }
 
 

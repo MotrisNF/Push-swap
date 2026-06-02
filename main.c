@@ -1,4 +1,6 @@
 #include "pushswap.h"
+#include <stdlib.h>
+#include <time.h>
 
 int     ft_check_order(t_list **stack, size_t size)
 {
@@ -30,6 +32,7 @@ void shuffle(int *arr, int n)
 
 int main(void)
 {
+	srand(time(NULL));
     int size = 100;
     int list[size];
 
@@ -41,19 +44,19 @@ int main(void)
     t_list *stack_a = ft_create_stack(list, size);
     t_list *stack_b = NULL;
 
-    size_t total_moves = ft_simple_algoritme((size_t)ft_lstsize(stack_a), &stack_a, &stack_b);
+    int total_moves = ft_medium_algoritme( &stack_a, &stack_b, (size_t)ft_lstsize(stack_a));
 	t_list *tmp = stack_a;
     while (tmp)
     {
         printf("%d\n", *(int *)(tmp->content));
         tmp = tmp->next;
     }
-    ft_push_b(&stack_a, &stack_b);
-    printf("\n%ld\n", total_moves);
-	if (ft_check_order(&stack_a, size) && stack_b == NULL)
-		printf("OK\n");
-	else
-		printf("KO\n");
+
+    printf("\n%d total moves.\n\n", total_moves);
+    if (ft_check_order(&stack_a, size) && !stack_b)
+	    printf("OK");
+    else
+	    printf("KO");
     return (0);
 }
 

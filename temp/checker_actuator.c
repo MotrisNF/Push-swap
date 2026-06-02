@@ -6,7 +6,7 @@
 /*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 02:13:58 by saperez-          #+#    #+#             */
-/*   Updated: 2026/06/01 02:46:49 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/02 19:07:35 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_checker_actuator(t_list **a, t_list **b, char *input)
 		ft_lstclear(a, free);
 		ft_lstclear(b, free);
 		free(input);
-		ft_printf("Error");
+		printf("Error");
 		exit (1);
 	}
 }
