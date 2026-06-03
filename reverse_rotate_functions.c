@@ -3,31 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate_functions.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: saperez- <saperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 21:18:25 by saperez-          #+#    #+#             */
-/*   Updated: 2026/05/31 23:08:31 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:23:02 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-void	ft_reverse_rotate_a(t_list **a)
+void	ft_reverse_rotate_a(t_list **a, t_moves **move_set)
 {
-	ft_reverse_rotate(a);
-	printf("rra\n");
+	if (ft_reverse_rotate(a))
+	{
+		(*move_set)->rra += 1;
+		printf("rra\n");
+	}
 }
 
-void	ft_reverse_rotate_b(t_list **b)
+void	ft_reverse_rotate_b(t_list **b, t_moves **move_set)
 {
-	ft_reverse_rotate(b);
-	printf("rrb\n");
+	if (ft_reverse_rotate(b))
+	{
+		(*move_set)->rrb += 1;
+		printf("rrb\n");
+	}
 }
 
-void	ft_reverse_rotate_both(t_list **a, t_list **b)
+void	ft_reverse_rotate_both(t_list **a, t_list **b, t_moves **move_set)
 {
-	ft_reverse_rotate(a);
-	ft_reverse_rotate(b);
-	printf("rrr\n");
+	if (ft_reverse_rotate(a) && ft_reverse_rotate(b))
+	{
+		(*move_set)->rrr += 1;
+		printf("rrr\n");
+	}
 }
-

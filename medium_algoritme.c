@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_algoritme.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: saperez- <saperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 21:52:52 by saperez-          #+#    #+#             */
-/*   Updated: 2026/06/02 21:55:14 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:34:39 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	ft_get_better_node(t_list **a, size_t size, size_t step, size_t chunk)
 		{
 			if ((cnt < size / 2 && cnt < b_pos) || (b_pos > size - cnt))
 			{
-				b_pos = (cnt < size / 2) * cnt + (cnt >= size / 2) * (size - cnt);
+				b_pos = (cnt < size / 2) * cnt
+						+ (cnt >= size / 2) * (size - cnt);
 				b_val = *(int *)temp->content;
 			}
 		}
@@ -81,7 +82,7 @@ int	ft_get_position(t_list **list, size_t value)
 
 	tmp = *list;
 	counter = 1;
-	while (value != *(int *)(tmp)->content)
+	while ((int)value != *(int *)(tmp)->content)
 	{
 		tmp = tmp->next;
 		counter++;
@@ -89,21 +90,21 @@ int	ft_get_position(t_list **list, size_t value)
 	return (counter);
 }
 
-static void	ft_rotate_and_push_b(t_list **a, t_list **b, int val, int *count, size_t limit)
+static void	ft_rotate_and_push_b(t_list **a, t_list **b,
+			int val, t_moves **move_set, size_t limit)
 {
 	while (*(int *)(*a)->content != val)
 	{
 		if (ft_get_up_down(a, val, limit))
-			ft_rotate_a(a);
+			ft_rotate_a(a, move_set);
 		else
-			ft_reverse_rotate_a(a);
-		(*count)++;
+			ft_reverse_rotate_a(a, move_set);
 	}
-	ft_push_b(a, b);
-	(*count)++;
+	ft_push_b(a, b, move_set);
 }
 
-static void	ft_sort_back_to_a(t_list **a, t_list **b, int *count)
+static void	ft_sort_back_to_a(t_list **a, t_list **b,
+			t_moves **move_set)
 {
 	int	i;
 
@@ -113,28 +114,25 @@ static void	ft_sort_back_to_a(t_list **a, t_list **b, int *count)
 		while (*(int *)(*b)->content != i)
 		{
 			if (ft_get_position(b, i) > ft_lstsize(*b) / 2)
-				ft_reverse_rotate_b(b);
+				ft_reverse_rotate_b(b, move_set);
 			else
-				ft_rotate_b(b);
-			(*count)++;
+				ft_rotate_b(b, move_set);
 		}
-		ft_push_a(a, b);
-		(*count)++;
+		ft_push_a(a, b, move_set);
 		i--;
 	}
 }
 
-int	ft_medium_algoritme(t_list **a, t_list **b, size_t size)
+void	ft_medium_algoritme(t_list **a, t_list **b,
+			size_t size, t_moves **move_set)
 {
 	size_t	chunk;
 	size_t	step;
 	size_t	i;
 	int		best_value;
-	int		counter;
 
 	chunk = ft_get_closet_sqrt(size) * 2;
 	step = 1;
-	counter = 0;
 	i = 1;
 	while (i <= size)
 	{
@@ -144,9 +142,8 @@ int	ft_medium_algoritme(t_list **a, t_list **b, size_t size)
 			step++;
 			continue ;
 		}
-		ft_rotate_and_push_b(a, b, best_value, &counter, size - i);
+		ft_rotate_and_push_b(a, b, best_value, move_set, size - i);
 		i++;
 	}
-	ft_sort_back_to_a(a, b, &counter);
-	return (counter);
+	ft_sort_back_to_a(a, b, move_set);
 }

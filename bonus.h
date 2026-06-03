@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: saperez- <saperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 02:45:40 by saperez-          #+#    #+#             */
-/*   Updated: 2026/06/01 02:46:36 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:14:20 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include "pushswap.h"
 
 //Checker
-void    ft_checker_actuator(t_list **a, t_list **b, char *input);
+void	ft_checker_actuator(t_list **a, t_list **b, char *input);
 
 #endif

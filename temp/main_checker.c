@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: saperez- <saperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 02:47:17 by saperez-          #+#    #+#             */
-/*   Updated: 2026/06/01 03:07:48 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:25:53 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ int	ft_check_order(t_list **stack, size_t size)
 	return (1);
 }
 
-
 int	main(int argc, char **argv)
 {
 	char	*line;
 	t_list	*stack_a;
 	t_list	*stack_b;
-	int	*numbers;
+	int		*numbers;
 	size_t	size;
 
 	numbers = ft_parser(argc, argv, &size);
@@ -56,5 +55,3 @@ int	main(int argc, char **argv)
 		ft_printf("KO\n");
 	return (0);
 }
-
-

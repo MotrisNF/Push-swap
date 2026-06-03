@@ -3,41 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   simple_algoritme.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: saperez- <saperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 21:53:44 by saperez-          #+#    #+#             */
-/*   Updated: 2026/05/31 23:31:52 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:35:04 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-size_t	ft_simple_algoritme(size_t size, t_list **a, t_list **b)
+void	ft_simple_algoritme(size_t size, t_list **a,
+			t_list **b, t_moves **move_set)
 {
-	size_t	i;
-	size_t	counter;
+	int	i;
 
-	i = 0;
-	counter = 0;
-	while (i < size)
+	i = 1;
+	while (i < (int)size)
 	{
-		if (i + 1 == *(int *)(*a)->content)
+		if (i == *(int *)(*a)->content)
 		{
-			ft_push_b(a, b);
-			counter++;
+			ft_push_b(a, b, move_set);
 			i++;
 		}
 		else
-		{
-			ft_rotate_a(a);
-			counter++;
-		}
+			ft_rotate_a(a, move_set);
 	}
-	i = 0;
 	while (*b)
-	{
-		ft_push_a(a, b);
-		counter++;
-	}
-	return (counter);
+		ft_push_a(a, b, move_set);
 }

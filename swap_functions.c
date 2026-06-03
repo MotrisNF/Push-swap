@@ -3,30 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   swap_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: saperez- <saperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 21:05:47 by saperez-          #+#    #+#             */
-/*   Updated: 2026/05/31 22:41:15 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/03 11:11:52 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-void	ft_swap_a(t_list **a)
+void	ft_swap_a(t_list **a, t_moves **move_set)
 {
-	ft_swap(a);
-	printf("sa");
+	if (ft_swap(a))
+	{
+		(*move_set)->rrb += 1;
+		printf("sa");
+	}
 }
 
-void	ft_swap_b(t_list **b)
+void	ft_swap_b(t_list **b, t_moves **move_set)
 {
-	ft_swap(b);
-	printf("sb");
+	if (ft_swap(b))
+	{
+		(*move_set)->rrb += 1;
+		printf("sb");
+	}
 }
 
-void	ft_swap_both(t_list **a, t_list **b)
+void	ft_swap_both(t_list **a, t_list **b, t_moves **move_set)
 {
-	ft_swap(a);
-	ft_swap(b);
-	printf("ss");
+	if (ft_swap(a) && ft_swap(b))
+	{
+		(*move_set)->rrb += 1;
+		printf("ss");
+	}
 }

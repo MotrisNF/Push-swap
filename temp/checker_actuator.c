@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_actuator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: saperez- <saperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 02:13:58 by saperez-          #+#    #+#             */
-/*   Updated: 2026/06/02 19:07:35 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:24:30 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_checker_actuator(t_list **a, t_list **b, char *input)
 	else if (ft_strncmp("pa\n", input, 4) == 0)
 		ft_push(a, b);
 	else if (ft_strncmp("pb\n", input, 4) == 0)
-		ft_push( b, a);
+		ft_push(b, a);
 	else if (ft_strncmp("ra\n", input, 4) == 0)
 		ft_rotate(a);
 	else if (ft_strncmp("rb\n", input, 4) == 0)

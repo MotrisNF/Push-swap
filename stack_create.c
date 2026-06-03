@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_create.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: saperez- <saperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 20:06:14 by saperez-          #+#    #+#             */
-/*   Updated: 2026/05/31 22:49:38 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:36:43 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_create_stack(int *index, int size)
 {
 	t_list	*lst;
 	t_list	*node;
-	size_t	i;
+	int	i;
 
 	i = 0;
 	lst = NULL;
@@ -25,7 +25,7 @@ t_list	*ft_create_stack(int *index, int size)
 		node = ft_lstnew(&index[i]);
 		if (!node)
 		{
-			ft_lstclear(&lst, free);
+			ft_lstclear(&lst);
 			return (NULL);
 		}
 		ft_lstadd_back(&lst, node);

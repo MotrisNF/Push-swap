@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saperez- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: saperez- <saperez-@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/31 20:03:15 by saperez-          #+#    #+#             */
-/*   Updated: 2026/05/31 22:44:47 by saperez-         ###   ########.fr       */
+/*   Updated: 2026/06/03 14:32:27 by saperez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,17 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_list **lst)
 {
 	t_list	*nxt;
 	t_list	*actual;
 
-	if (!lst || !del)
+	if (!lst)
 		return ;
 	actual = *lst;
 	while (actual != NULL)
 	{
 		nxt = actual->next;
-		del(actual->content);
 		free(actual);
 		actual = nxt;
 	}
